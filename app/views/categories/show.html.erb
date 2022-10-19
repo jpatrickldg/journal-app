@@ -34,7 +34,7 @@
     <% if @tasks.any? %>
       <div class="flex-auto grid grid-cols-auto gap-5 overflow-y-auto px-2">
         <% @tasks.each do |task| %>
-          <div class="h-full flex flex-col justify-between border-b border-b-gray-100hover:bg-gray-100">
+          <div class="h-min flex flex-col justify-between border-b border-b-gray-100hover:bg-gray-100 gap-2">
             <div>
               <div class="flex items-center gap-2 lg:text-lg">
                 <i class="fa-solid fa-list-check"></i>
