@@ -1,15 +1,13 @@
 Rails.application.routes.draw do
+  resources :categories do
+    resources :tasks do
+      post :completed, on: :member
+    end
+  end
   devise_for :users
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Defines the root path route ("/")
-  # root "articles#index"
-  unauthenticated :user do
-    root 'home#index', as: :unauthenticated_root
-  end
+  root "home#index"
 
-  authenticated :user do
-    root 'dashboards#index', as: :authenticated_root
-  end
-  
 end

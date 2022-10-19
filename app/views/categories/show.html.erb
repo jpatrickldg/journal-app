@@ -1,0 +1,60 @@
+<div class="grid grid-cols-[2fr_3fr] gap-10">
+  <div>
+    <div class="text-3xl font-bold mb-5 flex items-center gap-2">
+      <i class="fa-solid fa-book"></i>
+      <h1><%= @category.name %></h1>
+    </div>
+    <p class="text-justify"><%= @category.description %></p>
+  </div>
+  <div class="h-full">
+    <div class="flex items-center gap-5 pl-4">
+      <h1 class="text-xl font-bold">Tasks</h1>
+      <%= link_to 'Create Task', new_category_task_path(@category), class: 'block py-1.5 px-4 font-medium text-sm text-center text-white bg-blue-700 rounded-lg focus:ring-4 focus:ring-blue-200 hover:bg-blue-800 hover:cursor-pointer' %>
+    </div>
+    <% if @tasks.any? %>
+      <div class="grid grid-cols-auto auto-rows-fr gap-5 overflow-y-auto h-full">
+        <% @tasks.each do |task| %>
+          <div class="h-full flex flex-col justify-between p-4 border-b border-b-gray-100hover:bg-gray-100">
+            <div>
+              <div class="flex items-center gap-2 text-xl">
+                <i class="fa-solid fa-list-check"></i>
+                <span class="font-bold"><%= task.name %></span>
+              </div>
+              <div class="flex flex-col text-sm justify-center">
+                <div>
+                  <p><strong>Status:</strong> <%= task.is_completed ? 'Completed' : 'In Progress' %></p>
+                </div>
+                <div>
+                  <% if task.is_completed? %>
+                    <p><strong>Completion Date:</strong> <%= task.completion_date %></p>
+                  <% else %>
+                    <p><strong>Deadline:</strong> <%= task.deadline %></p>
+                  <% end %>
+                </div>
+              </div>
+              <p class="mt-2 text-justify"><%= task.description %></p>
+            </div>
+            <div class="flex items-center justify-end gap-5">
+              <% if !task.is_completed %>
+                <%= button_to completed_category_task_path(@category, task), class: 'text-green-700 hover:text-green-500' do %>
+                  <i class="fa-solid fa-check"></i>
+                <% end %>
+              <% end %>
+              <%= link_to edit_category_task_path(@category, task), class: 'text-blue-700 hover:text-blue-500' do %>
+                <i class="fa-regular fa-pen-to-square"></i>
+              <% end %>
+              <%= button_to category_task_path(@category, task), method: :delete, class: 'text-red-700 hover:text-red-500' do %>
+                <i class="fa-solid fa-trash"></i>
+              <% end %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    <% else %>
+      <div class="p-4">
+        <p>This journal has no tasks yet</p>
+      </div>
+    <% end %>
+  </div>
+</div>
+

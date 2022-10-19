@@ -1,0 +1,46 @@
+<div class="flex-auto overflow-y-auto">
+  <%= form_with model: [@category, @task], data:{turbo:false}, local: true do |f| %>
+    <div>
+      <% invalid_name = @task.errors.include?(:name) %>
+      <div class="mb-2">
+        <div class="flex items-center gap-2 mb-1">
+          <%= f.label :name, class: 'block font-medium' %>
+          <% if invalid_name %>
+            <% @task.errors.full_messages_for(:name).each do |msg| %>
+              <div class="text-red-500 text-sm">
+                (<%= msg %>)
+              </div>
+            <% end %>
+          <% end %>
+        </div>
+        <%= f.text_field :name, autofocus: (true if invalid_name), class: "bg-gray-50 w-full block border rounded-lg #{invalid_name ? 'border-red-400 border-2 focus:ring-red-400 focus:border-red-400' : 'border-gray-300 focus:ring-blue-500 focus:border-blue-500'}" %>
+      </div>
+
+      <% invalid_description = @task.errors.include?(:description) %>
+      <div class="mb-4">
+        <div class="flex items-center gap-2 mb-1">
+          <%= f.label :description, class: 'block font-medium' %>
+          <% if invalid_description %>
+            <% @task.errors.full_messages_for(:description).each do |msg| %>
+              <div class="text-red-500 text-sm">
+                (<%= msg %>)
+              </div>
+            <% end %>
+          <% end %>
+        </div>
+        <%= f.text_area :description, autofocus: (true if invalid_description), :rows => 4, class: "bg-gray-50 w-full block border rounded-lg #{invalid_description ? 'border-red-400 border-2 focus:ring-red-400 focus:border-red-400' : 'border-gray-300 focus:ring-blue-500 focus:border-blue-500'}" %>
+      </div>
+
+      <div class="mb-4">
+        <%= f.label :deadline, class: 'block font-medium' %>
+        <%= f.datetime_field :deadline, autofocus: (true if invalid_description), :rows => 4, class: "bg-gray-50 w-full block border rounded-lg border-gray-300 focus:ring-blue-500 focus:border-blue-500 uppercase" %>
+      </div>
+
+      <div class="flex gap-2 items-center">
+        <%= f.submit class: 'block py-1.5 px-4 font-medium text-center text-white bg-blue-700 rounded-lg focus:ring-4 focus:ring-blue-200 hover:bg-blue-800 hover:cursor-pointer' %>
+
+        <%= link_to 'Cancel', category_path(@category), class: 'block py-1.5 px-4 font-medium text-center text-white bg-blue-700 rounded-lg focus:ring-4 focus:ring-blue-200 hover:bg-blue-800 hover:cursor-pointer w-fit' %>
+      </div>
+    </div>
+  <% end %>
+</div>

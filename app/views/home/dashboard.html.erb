@@ -1,0 +1,41 @@
+<div class="px-5 py-3 border border-gray-300 rounded-lg shadow-md">
+  <h1 class="text-xl font-bold">Your Journals</h1>
+</div>
+
+<% if @categories.any? %>
+  <div class="my-5 grid grid-cols-auto md:grid-cols-2 lg:grid-cols-3 auto-rows-fr gap-5">
+    <% @categories.each do |category| %>
+      <div class="h-full flex flex-col justify-between p-8 border border-gray-100 rounded-lg shadow-md hover:bg-gray-100">
+        <div>
+          <div class="flex items-center gap-2 text-xl">
+            <i class="fa-solid fa-book"></i>
+            <%= link_to category.name, category_path(category), class: 'font-bold hover:underline' %>
+          </div>
+          <div class="flex text-sm items-center gap-2">
+            <div class="flex items-center gap-1">
+              <i class="fa-solid fa-list-check"></i>
+              <p><%= category.tasks.count %> Tasks</p>
+            </div>
+            <div class="flex items-center gap-1 text-green-600">
+              <i class="fa-regular fa-circle-check"></i>
+              <p><%= category.tasks.where(is_completed: true).count %> Completed</p>
+            </div>
+          </div>
+          <p class="mt-2 text-justify"><%= truncate(category.description, length: 150) %></p>
+        </div>
+        <div class="flex items-center justify-end gap-5">
+          <%= link_to edit_category_path(category), class: 'text-blue-700 hover:text-blue-500' do %>
+            <i class="fa-regular fa-pen-to-square"></i>
+          <% end %>
+          <%= button_to category_path(category), method: :delete, class: 'text-red-700 hover:text-red-500' do %>
+            <i class="fa-solid fa-trash"></i>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+<% else %>
+  <div class="p-4">
+    <p>You have not added any journals yet</p>
+  </div>
+<% end %>
