@@ -4,7 +4,6 @@
   </div>
   <ul class="flex items center text-sm lg:text-base gap-4 md:gap-5 lg:gap-10">
     <% if user_signed_in? %>
-      <li><%= link_to 'New Journal', new_category_path, class: 'block font-medium  hover:underline' %></li>
       <li><%= button_to 'Logout', destroy_user_session_path, method: :delete, class: 'block font-medium  hover:underline' %></li>
     <% end %>
   </ul>
