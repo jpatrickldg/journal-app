@@ -1,6 +1,6 @@
 # Journal App
 
-A simple journal app where users can create multiple journals with corresponding tasks that they can track. Click [here](https://jpldg-journal-app.herokuapp.com/) to view the app on Heroku. :smile:
+A simple journal app where users can create multiple journals with corresponding tasks that they can track.
 
 ![Screenshot](./screenshots/screenshot1.png)
 ![Screenshot](./screenshots/screenshot2.png)
